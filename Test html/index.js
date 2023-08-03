@@ -2,10 +2,10 @@ const sideMenu = document.querySelector("aside");
 const menuBtn = document.querySelector("#menu-btn");
 const closeBtn = document.querySelector("#close-btn");
 const themeToggler = document.querySelector(".theme-toggler");
-const showMorePlayers = document.querySelector(".sales-analytics a");
+const showMorePlayers = document.querySelector("#show-all-player-records");
 
 playerRecordsSize = 3
-
+playerRecordsState = "closed"
 
 
 menuBtn.addEventListener('click',()=>{
@@ -23,15 +23,15 @@ themeToggler.addEventListener('click',()=>{
     themeToggler.querySelector('span:nth-child(2)').classList.toggle('active')
 })
 
-Orders[0].raids.forEach(order =>{
+DBraids.forEach(raid =>{
     const tr = document.createElement('tr');
     const trContent = `
-    <td>${order.productName}</td>
-    <td>${order.productNumber}</td>
-    <td>${order.average}</td>
-    <td class="${order.paymentStatus.slice(0,-1) > 0 ? 'success' : order.paymentStatus.slice(0,-1) < 0 ? 'danger' : ''}">${order.paymentStatus}</td>
-    <td class="${order.shipping === 'Completed' ? 'primary' : order.shipping === 'Ongoing' ? 'warning' : ''}">${order.shipping}</td>
-    <td class="primary">Details</td>
+    <td>${raid.raidDate}</td>
+    <td>${raid.totalGold}</td>
+    <td>${raid.average}</td>
+    <td class="${raid.mejora.slice(0,-1) > 0 ? 'success' : raid.mejora.slice(0,-1) < 0 ? 'danger' : ''}">${raid.mejora}</td>
+    <td class="${raid.shipping === 'Completed' ? 'primary' : raid.shipping === 'Ongoing' ? 'warning' : ''}">${raid.shipping}</td>
+    <a href ="./raid_weekend.html?id=${raid.id}" class="primary">Details</a>
                     `
     tr.innerHTML = trContent;
     document.querySelector('table tbody').appendChild(tr);
@@ -39,7 +39,7 @@ Orders[0].raids.forEach(order =>{
 
 function refreshPlayers(start,number){
     contador = 0
-    Orders[0].players.sort(function compareByAge(a, b) {
+    DBplayers.sort(function compareByAge(a, b) {
         if (a.record < b.record) {
           return 1;
         }
@@ -73,10 +73,22 @@ function refreshPlayers(start,number){
 
 refreshPlayers(0,playerRecordsSize)
 showMorePlayers.addEventListener("click",() => {
-    last = playerRecordsSize
-    playerRecordsSize = playerRecordsSize +3
-    refreshPlayers(last,playerRecordsSize)
-    event.preventDefault()
+    if (playerRecordsState == "closed"){
+        last = playerRecordsSize
+        playerRecordsSize = playerRecordsSize +47
+        refreshPlayers(last,playerRecordsSize)
+        showMorePlayers.innerHTML = "Hide"
+        playerRecordsState = "open"
+        event.preventDefault()
+    } else {
+        playerRecordsSize = 3
+        document.querySelector('.sales-analytics-items').innerHTML ="";
+        refreshPlayers(0,playerRecordsSize)
+        showMorePlayers.innerHTML = "Show All"
+        playerRecordsState = "closed"
+        event.preventDefault()
+    }
+    
 })
 
 const root = document.documentElement;
