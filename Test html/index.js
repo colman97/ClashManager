@@ -6,7 +6,26 @@ const showMorePlayers = document.querySelector("#show-all-player-records");
 
 playerRecordsSize = 3
 playerRecordsState = "closed"
+if(getDarkModeCookie()){
+    setDarkModeCookie(getDarkModeCookie())
+    document.body.classList.add('dark-theme-variables');
+    themeToggler.querySelector('span:nth-child(1)').classList.toggle('active')
+    themeToggler.querySelector('span:nth-child(2)').classList.toggle('active')
+}
+function setDarkModeCookie(value) {
+    document.cookie = `darkmode=${value};`;
+}
 
+function getDarkModeCookie() {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === 'darkmode') {
+            return value === 'true';
+        }
+    }
+    return false; // Default to light mode if cookie not found
+}
 
 menuBtn.addEventListener('click',()=>{
     sideMenu.style.display='block';
@@ -17,7 +36,16 @@ closeBtn.addEventListener('click',()=>{
 })
 
 themeToggler.addEventListener('click',()=>{
-    document.body.classList.toggle('dark-theme-variables');
+
+    var isDarkMode = !getDarkModeCookie();
+    setDarkModeCookie(isDarkMode);
+    if (isDarkMode){
+        document.body.classList.add('dark-theme-variables');
+
+    } else {
+        document.body.classList.remove('dark-theme-variables');
+    }
+
 
     themeToggler.querySelector('span:nth-child(1)').classList.toggle('active')
     themeToggler.querySelector('span:nth-child(2)').classList.toggle('active')

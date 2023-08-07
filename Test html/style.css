@@ -77,6 +77,14 @@ body {
     grid-template-columns: 14rem auto 23rem;
 }
 
+.container-raid-weekend {
+    display:grid;
+    width:96%;
+    margin:0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 14rem auto ;
+}
+
 a {
     color:var(--color-dark);
 }
@@ -735,4 +743,13 @@ main .recent-orders a {
     .right .top button span {
         font-size: 2rem;
     }
+}
+
+/*=========================================   =========================================*/
+tr.collapsible {
+    cursor: pointer;
+}
+
+.content {
+    display: none;
 }

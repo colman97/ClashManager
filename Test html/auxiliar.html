@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr.collapsible {
+            cursor: pointer;
+        }
+        .content {
+            display: none;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Clickable Table</h1>
+    <table>
+        <tr class="collapsible">
+            <td>Row 1 Data 1</td>
+            <td>Row 1 Data 2</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="content">
+                    Additional information for Row 1
+                </div>
+            </td>
+        </tr>
+        <tr class="collapsible">
+            <td>Row 2 Data 1</td>
+            <td>Row 2 Data 2</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="content">
+                    Additional information for Row 2
+                </div>
+            </td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </table>
+
+    <script>
+        const collapsibleRows = document.querySelectorAll(".collapsible");
+
+        collapsibleRows.forEach(row => {
+            row.addEventListener("click", () => {
+                const content = row.nextElementSibling.querySelector(".content");
+                content.style.display = content.style.display === "block" ? "none" : "block";
+            });
+        });
+    </script>
+</body>
+</html>
