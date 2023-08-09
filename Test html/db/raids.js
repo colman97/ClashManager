@@ -1,5 +1,13 @@
 const DBraids=[
             {
+                id:7,
+                raidDate: '04/08/2023',
+                totalGold: '242425',
+                mejora: '-13.48%',
+                average:2331.01,
+                shipping: 'Completed'
+            },
+            {
                 id:1,
                 raidDate: '28/07/2023',
                 totalGold: '265958',

@@ -121,10 +121,10 @@ showMorePlayers.addEventListener("click",() => {
 
 const root = document.documentElement;
 
-participantes = 20
-totalClan = 42
+participantes = 19
+totalClan = 40
 comienzo = 1710
-valor = 2485.59
+valor = DBraids[0]['average']
 record = 2694.23
 
 porcentajeMejora = valor/comienzo *100 -100
