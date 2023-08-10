@@ -51,6 +51,22 @@ themeToggler.addEventListener('click',()=>{
     themeToggler.querySelector('span:nth-child(2)').classList.toggle('active')
 })
 
+DBraids.forEach(raid =>{
+    const tr = document.createElement('tr');
+    tr.classList.add("collapsible")
+    const trContent = `
+    <td>${raid.raidDate}</td>
+    <td>${raid.totalGold}</td>
+    <td>${raid.average}</td>
+    <td class="${raid.mejora.slice(0,-1) > 0 ? 'success' : raid.mejora.slice(0,-1) < 0 ? 'danger' : ''}">${raid.mejora}</td>
+    <td class="${raid.shipping === 'Completed' ? 'primary' : raid.shipping === 'Ongoing' ? 'warning' : ''}">${raid.shipping}</td>
+    
+    `
+    tr.innerHTML = trContent;
+    document.querySelector('table tbody').appendChild(tr);
+})
+
+
 const collapsibleRows = document.querySelectorAll(".collapsible");
 
 collapsibleRows.forEach(row => {
@@ -59,122 +75,3 @@ collapsibleRows.forEach(row => {
         content.style.display = content.style.display === "block" ? "none" : "block";
     });
 });
-
-playersCapitalRaid.forEach((player,index)  => {
-    option1 = document.createElement('option');
-    option2 = document.createElement('option');
-    
-    option1.innerHTML = player.name;
-    option2.innerHTML = player.name;
-    option1.value=index;
-    option2.value=index;
-    document.querySelector('#player1Selection').appendChild(option1);
-    document.querySelector('#player2Selection').appendChild(option2);
-})
-value1 = 0;
-value2 = 1;
-
-function getOption() {
-    selectElement1 = document.getElementById('player1Selection');
-    selectElement2 = document.getElementById('player2Selection');
-    value1 = selectElement1.value;
-    value2 = selectElement2.value;
-    plotGrapgh()
-}
-
-
-function plotGrapgh(){
-
-    var existingChart = Chart.getChart("myChart");
-    if (existingChart) {
-        existingChart.destroy();
-    }
-
-    var dataFromJS = [];
-    var labels = [];
-    raidsData =playersCapitalRaid[value1]
-    for (var i = 0; i < raidsData['raids'].length; i++) {
-        dataFromJS.push(raidsData['raids'][i]['capitalResourcesLooted']);
-        labelPretty = raidsData['raids'][i]['date'].slice(6,8)+"/"+raidsData['raids'][i]['date'].slice(4,6)+"/"+raidsData['raids'][i]['date'].slice(0,4);
-        labels.push(labelPretty);
-    }
-
-    var dataFromJS2 = [];
-    var labels2 = [];
-    raidsData2 =playersCapitalRaid[value2]
-    for (var i = 0; i < raidsData2['raids'].length; i++) {
-        dataFromJS2.push(raidsData2['raids'][i]['capitalResourcesLooted']);
-        labelPretty2 = raidsData2['raids'][i]['date'].slice(6,8)+"/"+raidsData2['raids'][i]['date'].slice(4,6)+"/"+raidsData2['raids'][i]['date'].slice(0,4);
-        labels2.push(labelPretty2);
-    }
-
-    const data = {
-        labels: labels,
-        datasets: [{
-        label: playersCapitalRaid[value1]['name'],
-        data: dataFromJS,
-        backgroundColor: [
-            'rgba(255, 26, 104, 0.2)',
-        ],
-        borderColor: [
-            'rgba(255, 26, 104, 1)',
-        ],
-        lineTension: 0
-        },{
-            label: playersCapitalRaid[value2]['name'],
-            data: dataFromJS2,
-            backgroundColor: [
-            'rgba(54, 162, 235, 0.2)',
-            ],
-            borderColor: [
-            'rgba(54, 162, 235, 1)',
-            ],
-            lineTension: 0
-        }]
-    };
-    const customLegend ={
-        id:'customLegend',
-        afterDraw:(chart,args,pluginOptions) =>{
-            const {ctx,data,chartArea:{left,right,top,bottom,width,height},scales: {x,y}} = chart;
-            ctx.save();
-
-            data.datasets.forEach((dataset,index)=>{
-                let color = 'transparent';
-                if(chart.isDatasetVisible(index)=== true){
-                    color = dataset.borderColor;
-                }
-                ctx.font = 'bolder 12px poppins';
-                ctx.fillStyle = color;
-                ctx.textAlign = 'right';
-                ctx.fillText(dataset.label,left -50,chart.getDatasetMeta(index).data[0].y);
-            })
-        }
-    }
-    // config 
-    const config = {
-        type: 'line',
-        data,
-        options: {
-            layout:{
-                padding:{
-                    left:(context)=>{
-                        return context.chart.ctx.measureText('aaaaaaaaaaaaaaaa').width +25;
-                    }
-                }
-            },
-        scales: {
-            y: {
-            beginAtZero: true
-            }
-        }
-        },
-        plugins:[customLegend]
-    };
-
-    // render init block
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
-}
-plotGrapgh();
