@@ -51,15 +51,17 @@ themeToggler.addEventListener('click',()=>{
     themeToggler.querySelector('span:nth-child(2)').classList.toggle('active')
 })
 
-DBraids.forEach(raid =>{
+DBraids.sort(function compare(a, b) {
+    return parseInt(b.raidDate,10) - parseInt(a.raidDate,10) 
+  }).forEach(raid =>{
     const tr = document.createElement('tr');
     tr.classList.add("collapsible")
     const trContent = `
-    <td>${raid.raidDate}</td>
+    <td>${raid.raidDate.slice(-2,)}/${raid.raidDate.slice(-4,-2)}/${raid.raidDate.slice(0,-4)}</td>
     <td>${raid.totalGold}</td>
     <td>${raid.average}</td>
     <td class="${raid.mejora.slice(0,-1) > 0 ? 'success' : raid.mejora.slice(0,-1) < 0 ? 'danger' : ''}">${raid.mejora}</td>
-    <td class="${raid.shipping === 'Completed' ? 'primary' : raid.shipping === 'Ongoing' ? 'warning' : ''}">${raid.shipping}</td>
+    <td class="${raid.status === 'ended' ? 'primary' : 'warning'}">${raid.status === 'ended' ? 'Completed' : 'Ongoing'}</td>
     
     `
     tr.innerHTML = trContent;

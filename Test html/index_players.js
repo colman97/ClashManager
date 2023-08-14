@@ -124,7 +124,6 @@ function plotGrapgh(){
         labelPretty2 = raidsData2['raids'][i]['date'].slice(6,8)+"/"+raidsData2['raids'][i]['date'].slice(4,6)+"/"+raidsData2['raids'][i]['date'].slice(0,4);
         labels2.push(labelPretty2);
     }
-
     const data = {
         labels: labels,
         datasets: [{
@@ -163,7 +162,15 @@ function plotGrapgh(){
                 ctx.font = 'bolder 12px poppins';
                 ctx.fillStyle = color;
                 ctx.textAlign = 'right';
-                ctx.fillText(dataset.label,left -50,chart.getDatasetMeta(index).data[0].y);
+                numeroImportante = 0
+                // busco a ver cual es el primer resultado no nulo, para poner a esa altura el nombre aa la izquierda
+                for(i=0;i<chart.getDatasetMeta(index).data.length;i++){
+                    if(dataset.data[i] != null){
+                        numeroImportante = i
+                        break;
+                    }
+                }
+                ctx.fillText(dataset.label,left -50,chart.getDatasetMeta(index).data[numeroImportante].y);
             })
         }
     }
@@ -197,10 +204,19 @@ function plotGrapgh(){
 }
 
 
+
 const data = {
-    labels: ["23/06/2023","30/06/2023","07/07/2023","14/07/2023","21/07/2023","28/07/2023","04/08/2023",],
+    labels: [],
     datasets: []
 };
+
+//cogemos los labels de la bbdd de raids
+DBraids.forEach((dataset,index)=>{
+    dateClean = dataset['raidDate'].slice(6,8)+"/"+dataset['raidDate'].slice(4,6)+"/"+dataset['raidDate'].slice(0,4);
+    data['labels'].push(dateClean)
+})
+
+console.log(data)
 const customLegend ={
     id:'customLegend',
     afterDraw:(chart,args,pluginOptions) =>{

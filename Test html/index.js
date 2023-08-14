@@ -51,16 +51,19 @@ themeToggler.addEventListener('click',()=>{
     themeToggler.querySelector('span:nth-child(2)').classList.toggle('active')
 })
 
-DBraids.forEach(raid =>{
+DBraids.sort(function compare(a, b) {
+    return parseInt(b.raidDate,10) - parseInt(a.raidDate,10) 
+  }).forEach(raid =>{
     const tr = document.createElement('tr');
+    tr.classList.add("collapsible")
     const trContent = `
-    <td>${raid.raidDate}</td>
+    <td>${raid.raidDate.slice(-2,)}/${raid.raidDate.slice(-4,-2)}/${raid.raidDate.slice(0,-4)}</td>
     <td>${raid.totalGold}</td>
     <td>${raid.average}</td>
     <td class="${raid.mejora.slice(0,-1) > 0 ? 'success' : raid.mejora.slice(0,-1) < 0 ? 'danger' : ''}">${raid.mejora}</td>
-    <td class="${raid.shipping === 'Completed' ? 'primary' : raid.shipping === 'Ongoing' ? 'warning' : ''}">${raid.shipping}</td>
-    <a href ="./raid_weekend.html?id=${raid.id}" class="primary">Details</a>
-                    `
+    <td class="${raid.status === 'ended' ? 'primary' :  'warning'}">${raid.status === 'ended' ? 'Completed' : 'Ongoing'}</td>
+    
+    `
     tr.innerHTML = trContent;
     document.querySelector('table tbody').appendChild(tr);
 })
@@ -121,11 +124,18 @@ showMorePlayers.addEventListener("click",() => {
 
 const root = document.documentElement;
 
-participantes = 19
-totalClan = 40
+participantes = DBraids[0]['participantes']
+totalClan = DBraids[0]['totales']
 comienzo = 1710
 valor = DBraids[0]['average']
-record = 2694.23
+max = 0
+for (i=0;i<DBraids.length;i++) {
+    if(max < DBraids[i]['average']){
+        max =  DBraids[i]['average']
+    }
+}
+console.log(max)
+record = max
 
 porcentajeMejora = valor/comienzo *100 -100
 porcentajeEstadoActual = valor/record*100;
