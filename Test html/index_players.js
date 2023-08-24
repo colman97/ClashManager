@@ -210,9 +210,11 @@ const data = {
     datasets: []
 };
 
+auxLabels = []
 //cogemos los labels de la bbdd de raids
 DBraids.forEach((dataset,index)=>{
     dateClean = dataset['raidDate'].slice(6,8)+"/"+dataset['raidDate'].slice(4,6)+"/"+dataset['raidDate'].slice(0,4);
+    auxLabels.push(dataset['raidDate'])
     data['labels'].push(dateClean)
 })
 
@@ -259,16 +261,23 @@ const config = {
 
 playersCapitalRaid.forEach((player,index) =>{
     var dataFromJS3 = [];
-    var labels3 = [];
-    raidsData3 =playersCapitalRaid[index]
-    for (var i = 0; i < raidsData3['raids'].length; i++) {
-        dataFromJS3.push(raidsData3['raids'][i]['capitalResourcesLooted']);
-        labelPretty3 = raidsData3['raids'][i]['date'].slice(6,8)+"/"+raidsData3['raids'][i]['date'].slice(4,6)+"/"+raidsData3['raids'][i]['date'].slice(0,4);
-        labels3.push(labelPretty3);
-    }
-
+    for (var i = 0; i < auxLabels.length; i++) {
+        found = 0
+        for ( var x = 0; x < player['raids'].length; x++) {
+            console.log(player['name'],player['raids'][x]['date'],auxLabels[i])
+            if (player['raids'][x]['date'] == auxLabels[i]) {
+                dataFromJS3.push(player['raids'][x]['capitalResourcesLooted']);
+                found = 1
+            } else {
+            }
+        }
+        if (found == 0) {
+            dataFromJS3.push(null);
+        }
+     }
+     console.log(dataFromJS3);
     data3={}
-    data3['label'] = playersCapitalRaid[index]['name']
+    data3['label'] = player['name']
     data3['data'] = dataFromJS3
     data3['backgroundColor'] = getRandomColor(index)
     data3['borderColor'] = getRandomColor(index)
