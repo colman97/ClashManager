@@ -80,6 +80,23 @@
             border-radius: 20px;
             background: var(--color-white);
         }
+                
+        .flex-table {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+
+        .flex-cell {
+            flex: 1;
+            text-align: center;
+        }
 
     </style>
 </head>
@@ -126,7 +143,7 @@
                     <h3>Clan League</h3>
                     <span class="message-count">1</span>
                 </a>
-                <a href="informacion_util.html">
+                <a href="#">
                     <span class="material-icons-sharp">info</span>
                     <h3>Información util</h3>
                 </a>
@@ -157,75 +174,77 @@
 
         </div>
         <div id="menu">
-            <div class="tab active" onclick="showTab(0)">Raid Weekend</div>
-            <div class="tab" onclick="showTab(1)">Clan Wars</div>
-            <div class="tab" onclick="showTab(2)">Clan League</div>
+            <div class="tab active" onclick="showTab(0)">Pociones vs Martillos</div>
+            <div class="tab " onclick="showTab(1)">En construccion</div>
+            <div class="tab" onclick="showTab(2)">En construccion</div>
+            <div class="tab" onclick="showTab(3)">En construccion</div>
+            <div class="tab " onclick="showTab(4)">PlaceHolder para el buscador de jugadores</div>
         </div>
         <div class="tab-content active" id="tab1">
-            <h2>Raid Weekend</h2>
-            <table>
-                <tr>
-                    <div style="margin:50px 0 50px 0;" class="chartBox2">
-                        <canvas id="myChart2"></canvas>
-                    </div>
-                </tr>
-                <tr>
-                    <h2 class="name">Comparar Jugadores</h3>
-                </tr>
-                <tr class="data">
-                    <td>
-                        <button style="margin:3rem;width:220px;height:40px;background-color:var(--color-success)" onclick="getOption()"> Comparar </button>
-                        <div style="display:flex; margin: 2rem;">
-                            <div style="margin:1rem;">
-                                <select name="player1Selection" id="player1Selection"></select>
-                            </div>
-                            <div style="margin:1rem;">
-                                <select name="player2Selection" id="player2Selection"></select>
-                            </div>
-                        </div>
-                    </td>
-                    <td  style="height:100%">
-                        <div class="chartBox">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    </td> 
-                </tr>
-            </table>
-        </div>
+            <h2>Pociones vs Martillos</h2>    
+            <br>
+            <div>Esta tabla ayudara a ver si es preferible comprar X numero de pociones de constructor con las chapas de la liga de clanes, o si es mejor usarlas en martillos.</div>
+            <div>Depende del numero de contructores que tengas, en nuestro caso haremos solo 5 y 6 constructores, ya que excepto en casos muy extraños, si no has llegado a tener 5/6 constructores, lo normal va a ser siempre pociones de constructor en vez de martillos.</div>
+            <br>
+            <div>No añadiremos columna para el martillo de tropas y pociones ya que no les afectan las pociones de constructor, y recomendamos comprar las pociones del laboratorio con las chapas de la capital del clan.</div>
+            <div>Puedes conseguir hasta 3 de ellas cada semana en la tienda. Recomendamos coger siempre 3 cada semana.</div>
+            <br>
+            <div>Los heroes se calculan asumiendo que solo vas a tener esos heroes mejorandose, y ninguna estructura mas, cosa que no es cierta para casi cualquier caso.</div> 
+            <div>El calculo por si fuera el caso de que solo quedan heroes por mejorar y vais a dejar el resto de constructores libres se añade al final de la pagina con el formato '1 heroe // 2 heroes // 3 heroes // 4 heroes'</div>
+            <div>Que dependera del numero de heroes que vayas a poenr a mejorear.</div>
+            <div>Por lo que pasaremos a hacer un calculo combinando el tener a los heroes mejorandose y el resto de constructores en estructuras, y mantendra el mismo formato de  numero de heroes siendo 1 // 2 // 3 // 4</div>
+            <br>
+            <div> Si se tiene alguna estructura / heroe con un tiempo mayor o igual al indicado en la tabla, sera mas rentable comprar el martillo de estructuras o de heroe si se diese el caso.</div>
+            <div> Si no, sera mas rentable la pocion de constructor.</div>
+            <br>
+            <div class="flex-table">
+                <div class="flex-row">
+                <div class="flex-cell"></div>
+                <div class="flex-cell">Estructuras</div>
+                <div class="flex-cell">Heroes</div>
+                </div>
+                <div class="flex-row">
+                <div class="flex-cell">5 Constructores</div>
+                <div class="flex-cell">7d 12h</div>
+                <div class="flex-cell">8d 1h 30min // 8d 15h // 9d 4h 30min // 9d 18h</div>
+                </div>
+                <div class="flex-row">
+                <div class="flex-cell">6 Constructores</div>
+                <div class="flex-cell">9d</div>
+                <div class="flex-cell">9d 13h 30min // 10d 3h // 10d 16h 30min // 11d 6h</div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div> Tiempo por si solo van a estar mejorandose los heroes con pociones vs usar martillo de heroes:</div>
+            <br>
+            <div class="flex-row">
+            <div class="flex-cell">Independientemente de si tienes 5 o 6 constructores</div></div>
+            <div class="flex-row">
+            <div class="flex-cell">2d 1h 30min // 4d 3h // 6d 4h 30min // 8d 6h</div></div>
+            </div>
         <div class="tab-content" id="tab2">
-            <h2>Clan Wars</h2>
-            <table>
-                <tr>
-                    <th>Header 1</th>
-                    <th>Header 2</th>
-                </tr>
-                <tr>
-                    <td>Data 1</td>
-                    <td>Data 2</td>
-                </tr>
-            </table>
+            <h2>En construccion</h2>
         </div>
         <div class="tab-content" id="tab3">
-            <h2>Clan League</h2>
-            <table>
-                <tr>
-                    <th>Header 1</th>
-                    <th>Header 2</th>
-                </tr>
-                <tr>
-                    <td>
-                        </td>
-                    <td>Data 2</td>
-                </tr>
-            </table>
+            <h2>En construccion</h2>
+        </div>
+        <div class="tab-content" id="tab4">
+            <h2>En construccion</h2>
+        </div>
+        <div class="tab-content" id="tab5">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar Jugadores...">
+                <div id="searchResults" class="search-results"></div>
+            </div>
         </div>
     </main>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
 <script src="./db/playersCapitalRaid.js"></script>
-<script src="./db/raids.js"></script>
-<script src="./index_players.js"></script>
+<script src="./index_informacion.js"></script>
 
     <script>
         function showTab(tabIndex) {
