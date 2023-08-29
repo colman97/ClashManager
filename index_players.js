@@ -108,24 +108,43 @@ function plotGrapgh(){
     }
 
     var dataFromJS = [];
-    var labels = [];
+    var cleanLabels = [];
     raidsData =playersCapitalRaid[value1]
-    for (var i = 0; i < raidsData['raids'].length; i++) {
-        dataFromJS.push(raidsData['raids'][i]['capitalResourcesLooted']);
-        labelPretty = raidsData['raids'][i]['date'].slice(6,8)+"/"+raidsData['raids'][i]['date'].slice(4,6)+"/"+raidsData['raids'][i]['date'].slice(0,4);
-        labels.push(labelPretty);
-    }
+    for (var i = 0; i < auxLabels.length; i++) {
+        found = 0
+        for ( var x = 0; x < raidsData['raids'].length; x++) {
+            console.log(raidsData['name'],raidsData['raids'][x]['date'],auxLabels[i])
+            if (raidsData['raids'][x]['date'] == auxLabels[i]) {
+                dataFromJS.push(raidsData['raids'][x]['capitalResourcesLooted']);
+                found = 1
+            } else {
+            }
+        }
+        if (found == 0) {
+            dataFromJS.push(null);
+        }
+        cleanLabels.push(auxLabels[i].slice(6,8)+"/"+auxLabels[i].slice(4,6)+"/"+auxLabels[i].slice(0,4))
+     }
 
     var dataFromJS2 = [];
-    var labels2 = [];
     raidsData2 =playersCapitalRaid[value2]
-    for (var i = 0; i < raidsData2['raids'].length; i++) {
-        dataFromJS2.push(raidsData2['raids'][i]['capitalResourcesLooted']);
-        labelPretty2 = raidsData2['raids'][i]['date'].slice(6,8)+"/"+raidsData2['raids'][i]['date'].slice(4,6)+"/"+raidsData2['raids'][i]['date'].slice(0,4);
-        labels2.push(labelPretty2);
-    }
+    for (var i = 0; i < auxLabels.length; i++) {
+        found = 0
+        for ( var x = 0; x < raidsData2['raids'].length; x++) {
+            console.log(raidsData2['name'],raidsData2['raids'][x]['date'],auxLabels[i])
+            if (raidsData2['raids'][x]['date'] == auxLabels[i]) {
+                dataFromJS2.push(raidsData2['raids'][x]['capitalResourcesLooted']);
+                found = 1
+            } else {
+            }
+        }
+        if (found == 0) {
+            dataFromJS2.push(null);
+        }
+     }
+
     const data = {
-        labels: labels,
+        labels: cleanLabels,
         datasets: [{
         label: playersCapitalRaid[value1]['name'],
         data: dataFromJS,
@@ -233,7 +252,15 @@ const customLegend ={
             ctx.font = 'bolder 12px poppins';
             ctx.fillStyle = color;
             ctx.textAlign = 'right';
-            ctx.fillText(dataset.label,left -50,chart.getDatasetMeta(index).data[0].y);
+            numeroImportante = 0
+                // busco a ver cual es el primer resultado no nulo, para poner a esa altura el nombre aa la izquierda
+                for(i=0;i<chart.getDatasetMeta(index).data.length;i++){
+                    if(dataset.data[i] != null){
+                        numeroImportante = i
+                        break;
+                    }
+                }
+                ctx.fillText(dataset.label,left -50,chart.getDatasetMeta(index).data[numeroImportante].y);
         })
     }
 }

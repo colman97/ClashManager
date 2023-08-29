@@ -4,7 +4,7 @@ const closeBtn = document.querySelector("#close-btn");
 const themeToggler = document.querySelector(".theme-toggler");
 const showMorePlayers = document.querySelector("#show-all-player-records");
 
-playerRecordsSize = 3
+playerRecordsSize = 5
 playerRecordsState = "closed"
 if(getDarkModeCookie()){
     setDarkModeCookie(getDarkModeCookie())
@@ -68,60 +68,6 @@ DBraids.sort(function compare(a, b) {
     document.querySelector('table tbody').appendChild(tr);
 })
 
-function refreshPlayers(start,number){
-    contador = 0
-    DBplayers.sort(function compareByAge(a, b) {
-        if (a.record < b.record) {
-          return 1;
-        }
-        if (a.record > b.record) {
-          return -1;
-        }
-        return 0;
-      }).slice(start,number).forEach(player =>{
-        
-        arr=["success","primary","danger"]
-        div = document.createElement('div');
-        divContent = `
-            <div class="icon ${arr[contador]}">
-                <span class="material-icons-sharp">person</span>
-            </div>
-            <div class="right">
-                <div class="info">
-                    <h3>${player.nombre}</h3>
-                    <small class="text-muted">${player.fecha}</small>
-                </div>
-                <h5 class="${player.porcentaje.slice(0,-1) > 0 ? 'success' : player.porcentaje.slice(0,-1) < 0 ? 'danger' : ''}">${player.porcentaje}</h5>
-                <h3>${player.record}</h3>
-            </div>
-            `
-        div.innerHTML = divContent;
-        div.classList.add("item")
-        document.querySelector('.sales-analytics-items').appendChild(div);
-        contador = contador +1
-    })
-}
-
-refreshPlayers(0,playerRecordsSize)
-showMorePlayers.addEventListener("click",() => {
-    if (playerRecordsState == "closed"){
-        last = playerRecordsSize
-        playerRecordsSize = playerRecordsSize +47
-        refreshPlayers(last,playerRecordsSize)
-        showMorePlayers.innerHTML = "Hide"
-        playerRecordsState = "open"
-        event.preventDefault()
-    } else {
-        playerRecordsSize = 3
-        document.querySelector('.sales-analytics-items').innerHTML ="";
-        refreshPlayers(0,playerRecordsSize)
-        showMorePlayers.innerHTML = "Show All"
-        playerRecordsState = "closed"
-        event.preventDefault()
-    }
-    
-})
-
 const root = document.documentElement;
 
 participantes = DBraids[0]['participantes']
@@ -172,3 +118,88 @@ if (porcentajeEstadoActual >= 100) {
     root.style.setProperty('--color-circle',"#41f1b6");
 }
 root.style.setProperty('--estado-actual', porcentajeEstadoActual);
+
+
+function refreshPlayers(start,number,media){
+    contador = 0
+    listaRecords = []
+    playersCapitalRaid.forEach(player =>{
+        recordLocal = 0
+        recordDate= ""
+        numAttack = 0
+        totalAvg = 0
+        contadorAvgTotal = 0
+        player['raids'].forEach(raid =>{
+            contadorAvgTotal += 1
+            totalAvg += raid['capitalResourcesLooted']
+            if (raid['capitalResourcesLooted'] > recordLocal){
+                recordLocal = raid['capitalResourcesLooted']
+                recordDate = raid['date']
+                numAttack = raid['attacks']
+            }
+        })
+        jugadorDict = {}
+        jugadorDict['nombre'] = player['name']
+        jugadorDict['record'] = recordLocal
+        jugadorDict['fecha'] = recordDate
+        jugadorDict['avgTotal'] = Math.round(totalAvg/contadorAvgTotal)
+        mediaJugador = recordLocal/numAttack
+        jugadorDict['porcentaje'] = Math.round((((recordLocal/(media*6))-1)*100)*100)/100 + "%"
+        listaRecords.push(jugadorDict)
+    });
+
+    listaRecords.sort(function compareByAge(a, b) {
+        if (a['record'] < b['record']) {
+          return 1;
+        }
+        if (a['record'] > b['record']) {
+          return -1;
+        }
+        return 0;
+      }).slice(start,number).forEach(player =>{
+        console.log(player)
+        arr=["success","primary","danger"]
+        div = document.createElement('div');
+        divContent = `
+        <div>${contador+ start +1}</div>
+            <div class="icon ${arr[contador % arr.length]}">
+                <span class="material-icons-sharp">person</span>
+            </div>
+            <div class="right">
+                <div class="info">
+                    <h3>${player.nombre}</h3>
+                    <small class="text-muted">${player.fecha.slice(-2,)}/${player.fecha.slice(-4,-2)}/${player.fecha.slice(0,-4)}</small>
+                </div>
+                <h5 class="${player.porcentaje.slice(0,-1) > 0 ? 'success' : player.porcentaje.slice(0,-1) < 0 ? 'danger' : ''}">${player.porcentaje}</h5>
+                <div class="info">
+                    <h3>Best: ${player['record']}</h3>
+                    <small class="text-muted">avg: ${player['avgTotal']}</small>
+                </div>
+            </div>
+            `
+        div.innerHTML = divContent;
+        div.classList.add("item")
+        document.querySelector('.sales-analytics-items').appendChild(div);
+        contador = contador +1
+    })
+}
+
+refreshPlayers(0,playerRecordsSize,record)
+showMorePlayers.addEventListener("click",() => {
+    if (playerRecordsState == "closed"){
+        last = playerRecordsSize
+        playerRecordsSize = playerRecordsSize +45
+        refreshPlayers(last,playerRecordsSize,record)
+        showMorePlayers.innerHTML = "Hide"
+        playerRecordsState = "open"
+        event.preventDefault()
+    } else {
+        playerRecordsSize = 5
+        document.querySelector('.sales-analytics-items').innerHTML ="";
+        refreshPlayers(0,playerRecordsSize,record)
+        showMorePlayers.innerHTML = "Show All"
+        playerRecordsState = "closed"
+        event.preventDefault()
+    }
+    
+})
