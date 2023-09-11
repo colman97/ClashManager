@@ -189,6 +189,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 16463
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 15149
             }
         ]
     },
@@ -277,6 +283,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 12910
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 8100
             }
         ]
     },
@@ -413,6 +425,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 19519
+            },
+            {
+                "date": "20230908",
+                "attacks": 5,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 13441
             }
         ]
     },
@@ -484,6 +502,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 14930
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 15398
             }
         ]
     },
@@ -549,6 +573,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 14645
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 16213
             }
         ]
     },
@@ -620,6 +650,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 17925
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 14485
             }
         ]
     },
@@ -679,6 +715,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 18384
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 21552
             }
         ]
     },
@@ -779,6 +821,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 13650
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 15785
             }
         ]
     },
@@ -844,6 +892,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 18683
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 18700
             }
         ]
     },
@@ -915,6 +969,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 18825
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 14996
             }
         ]
     },
@@ -1085,6 +1145,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 18678
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 17285
             }
         ]
     },
@@ -1256,6 +1322,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 12490
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 12415
             }
         ]
     },
@@ -1337,6 +1409,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 12864
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 18052
             }
         ]
     },
@@ -1428,6 +1506,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 13685
+            },
+            {
+                "date": "20230908",
+                "attacks": 2,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 4798
             }
         ]
     },
@@ -1491,6 +1575,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 14691
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 20871
             }
         ]
     },
@@ -1519,6 +1609,12 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 16285
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 19235
             }
         ]
     },
@@ -1536,6 +1632,23 @@ const playersCapitalRaid = [
                 "attacks": 6,
                 "maxAttacks": 6,
                 "capitalResourcesLooted": 7780
+            },
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 7645
+            }
+        ]
+    },
+    {
+        "name": "ZEUS",
+        "raids": [
+            {
+                "date": "20230908",
+                "attacks": 6,
+                "maxAttacks": 6,
+                "capitalResourcesLooted": 15342
             }
         ]
     }
