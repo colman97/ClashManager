@@ -120,7 +120,7 @@ if (porcentajeEstadoActual >= 100) {
 root.style.setProperty('--estado-actual', porcentajeEstadoActual);
 
 
-function refreshPlayers(start,number,media){
+function refreshPlayers(start,number,media,tipo){
     contador = 0
     listaRecords = []
     playersCapitalRaid.forEach(player =>{
@@ -184,19 +184,19 @@ function refreshPlayers(start,number,media){
     })
 }
 
-refreshPlayers(0,playerRecordsSize,record)
+refreshPlayers(0,playerRecordsSize,record,1)
 showMorePlayers.addEventListener("click",() => {
     if (playerRecordsState == "closed"){
         last = playerRecordsSize
         playerRecordsSize = playerRecordsSize +45
-        refreshPlayers(last,playerRecordsSize,record)
+        refreshPlayers(last,playerRecordsSize,record,1)
         showMorePlayers.innerHTML = "Hide"
         playerRecordsState = "open"
         event.preventDefault()
     } else {
         playerRecordsSize = 5
         document.querySelector('.sales-analytics-items').innerHTML ="";
-        refreshPlayers(0,playerRecordsSize,record)
+        refreshPlayers(0,playerRecordsSize,record,1)
         showMorePlayers.innerHTML = "Show All"
         playerRecordsState = "closed"
         event.preventDefault()
