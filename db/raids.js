@@ -194,5 +194,15 @@ const DBraids = [
         "status": "ended",
         "participantes": 12,
         "totales": 48
+    },
+    {
+        "id": 22,
+        "raidDate": "20231117",
+        "totalGold": 175322,
+        "mejora": "-5.6%",
+        "average": 3187.67,
+        "status": "ended",
+        "participantes": 10,
+        "totales": 49
     }
 ];
